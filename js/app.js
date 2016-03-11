@@ -1,0 +1,112 @@
+(function() {
+  'use strict';
+
+  var app = {
+    isLoading: true,
+    visibleCards: {},
+    selectedCities: [],
+    spinner: document.querySelector('.loader'),
+    cardTemplate: document.querySelector('.cardTemplate'),
+    container: document.querySelector('.main'),
+    addDialog: document.querySelector('.dialog-container'),
+    daysOfWeek: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  };
+
+  document.getElementById('butRefresh').addEventListener('click', function() {
+    app.updateForecasts();
+  });
+
+  document.getElementById('butAdd').addEventListener('click', function() {
+    app.toggleAddDialog(true);
+  });
+
+  document.getElementById('butAddCity').addEventListener('click', function() {
+    var select = document.getElementById('selectCityToAdd');
+    var selected = select.options[select.selectedIndex];
+    var key = selected.value;
+    var label = selected.textContent;
+    app.getForecast(key, label);
+    app.selectedCities.push({key: key, label: label});
+    // TODO: Save user preferences
+    app.toggleAddDialog(false);
+  });
+
+  document.getElementById('butAddCancel').addEventListener('click', function() {
+    app.toggleAddDialog(false);
+  });
+
+  app.toggleAddDialog = function(visible) {
+    if (visible) {
+      app.addDialog.classList.add('dialog-container--visible');
+    } else {
+      app.addDialog.classList.remove('dialog-container--visible');
+    }
+  };
+
+  app.updateForecastCard = function(data) {
+    var card = app.visibleCards[data.key];
+    if (!card) {
+      card = app.cardTemplate.cloneNode(true);
+      card.classList.remove('cardTemplate');
+      card.querySelector('.location').textContent = data.label;
+      card.removeAttribute('hidden');
+      app.container.appendChild(card);
+      app.visibleCards[data.key] = card;
+    }
+    card.querySelector('.description').textContent = data.currently.summary;
+    card.querySelector('.date').textContent = new Date(data.currently.time * 1000);
+    card.querySelector('.current .icon').classList.add(data.currently.icon);
+    card.querySelector('.current .temperature .value').textContent = Math.round(data.currently.temperature);
+    card.querySelector('.current .feels-like .value').textContent = Math.round(data.currently.apparentTemperature);
+    card.querySelector('.current .precip').textContent = Math.round(data.currently.precipProbability * 100) + '%';
+    card.querySelector('.current .humidity').textContent = Math.round(data.currently.humidity * 100) + '%';
+    card.querySelector('.current .wind .value').textContent = Math.round(data.currently.windSpeed);
+    card.querySelector('.current .wind .direction').textContent = data.currently.windBearing;
+    var nextDays = card.querySelectorAll('.future .oneday');
+    var today = new Date();
+    today = today.getDay();
+    for (var i = 0; i < 7; i++) {
+      var nextDay = nextDays[i];
+      var daily = data.daily.data[i];
+      if (daily && nextDay) {
+        nextDay.querySelector('.date').textContent = app.daysOfWeek[(i + today) % 7];
+        nextDay.querySelector('.icon').classList.add(daily.icon);
+        nextDay.querySelector('.temp-high .value').textContent = Math.round(daily.temperatureMax);
+        nextDay.querySelector('.temp-low .value').textContent = Math.round(daily.temperatureMin);
+      }
+    }if (app.isLoading) {
+      app.spinner.setAttribute('hidden', true);
+      app.container.removeAttribute('hidden');
+      app.isLoading = false;
+    }
+  };
+
+  var fakeForecast = {
+    key: 'newyork',
+    label: 'New York, NY',
+    currently: {
+      time: 1453489481,
+      summary: 'Clear',
+      icon: 'partly-cloudy-day',
+      temperature: 60,
+      apparentTemperature: 65,
+      precipProbability: 0.25,
+      humidity: 0.75,
+      windBearing: 1.25,
+      windSpeed: 1.50
+    },
+    daily: {
+      data: [
+        {icon: 'clear-day', temperatureMax: 60, temperatureMin: 50},
+        {icon: 'rain', temperatureMax: 60, temperatureMin: 50},
+        {icon: 'snow', temperatureMax: 60, temperatureMin: 50},
+        {icon: 'sleet', temperatureMax: 60, temperatureMin: 50},
+        {icon: 'fog', temperatureMax: 60, temperatureMin: 50},
+        {icon: 'wind', temperatureMax: 60, temperatureMin: 50},
+        {icon: 'partly-cloudy-day', temperatureMax: 60, temperatureMin: 50},
+      ]
+    }
+  };
+
+  app.updateForecastCard(fakeForecast);
+})();
