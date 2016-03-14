@@ -81,6 +81,32 @@
     }
   };
 
+  app.getForecast = function(key, label) {
+    var url = 'https://publicdata-weather.firebaseio.com/';
+    url += key + ".json";
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+      if(request.readyState === XMLHttpRequest.DONE) {
+        if(request.status === 200) {
+          var response = JSON.parse(request.response);
+          response.key = key;
+          response.label = label;
+          app.hasRequestPending = false;
+          app.updateForecastCard(response);
+        }
+      }
+    };
+    request.open('GET', url);
+    request.send();
+  };
+
+  app.updateForecasts = function() {
+    var keys = Object.keys(app.visibleCards);
+    keys.forEach(function(key) {
+      app.getForecast(key);
+    });
+  };
+
   var fakeForecast = {
     key: 'newyork',
     label: 'New York, NY',
@@ -108,5 +134,5 @@
     }
   };
 
-  app.updateForecastCard(fakeForecast);
+  // app.updateForecastCard(fakeForecast);
 })();
