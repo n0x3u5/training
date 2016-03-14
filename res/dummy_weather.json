@@ -1,0 +1,26 @@
+{
+  "key": "newyork",
+  "label": "New York, NY",
+  "currently": {
+    "time": 1453489481,
+    "summary": "Clear",
+    "icon": "partly-cloudy-day",
+    "temperature": 60,
+    "apparentTemperature": 65,
+    "precipProbability": 0.25,
+    "humidity": 0.75,
+    "windBearing": 1.25,
+    "windSpeed": 1.50
+  },
+  "daily": {
+    "data": [
+      {"icon": "clear-day", "temperatureMax": 60, "temperatureMin": 50},
+      {"icon": "rain", "temperatureMax": 60, "temperatureMin": 50},
+      {"icon": "snow", "temperatureMax": 60, "temperatureMin": 50},
+      {"icon": "sleet", "temperatureMax": 60, "temperatureMin": 50},
+      {"icon": "fog", "temperatureMax": 60, "temperatureMin": 50},
+      {"icon": "wind", "temperatureMax": 60, "temperatureMin": 50},
+      {"icon": "partly-cloudy-day", "temperatureMax": 60, "temperatureMin": 50}
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="weather.xsl" ?>
+
+<root>
+  <key>newyork</key>
+  <label>New York, NY</label>
+  <currently>
+    <time>1453489481</time>
+    <summary>Clear</summary>
+    <icon>partly-cloudy-day</icon>
+    <temperature>60</temperature>
+    <apparentTemperature>65</apparentTemperature>
+    <precipProbability>0.25</precipProbability>
+    <humidity>0.75</humidity>
+    <windBearing>1.25</windBearing>
+    <windSpeed>1.50</windSpeed>
+  </currently>
+  <daily>
+    <data>
+      <icon>clear-day</icon>
+      <temperatureMax>60</temperatureMax>
+      <temperatureMin>50</temperatureMin>
+    </data>
+    <data>
+      <icon>rain</icon>
+      <temperatureMax>60</temperatureMax>
+      <temperatureMin>50</temperatureMin>
+    </data>
+    <data>
+      <icon>snow</icon>
+      <temperatureMax>60</temperatureMax>
+      <temperatureMin>50</temperatureMin>
+    </data>
+    <data>
+      <icon>sleet</icon>
+      <temperatureMax>60</temperatureMax>
+      <temperatureMin>50</temperatureMin>
+    </data>
+    <data>
+      <icon>fog</icon>
+      <temperatureMax>60</temperatureMax>
+      <temperatureMin>50</temperatureMin>
+    </data>
+    <data>
+      <icon>wind</icon>
+      <temperatureMax>60</temperatureMax>
+      <temperatureMin>50</temperatureMin>
+    </data>
+    <data>
+      <icon>partly-cloudy-day</icon>
+      <temperatureMax>60</temperatureMax>
+      <temperatureMin>50</temperatureMin>
+    </data>
+  </daily>
+</root>
