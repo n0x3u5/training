@@ -34,7 +34,7 @@ console.log("stooge['first-name'] is " + stooge['first-name']);
 
 
 // Custom Object.create() in case browser doesn't support it.
-// Most browsers do. IE did from IE10.
+// Most browsers do. Even IE does IE10 onwards.
 console.log("Creating Object.create()");
 if (typeof Object.create !== 'function') {
   Object.create = function (o) {
