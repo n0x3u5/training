@@ -7,15 +7,20 @@ body {
 main {
   flex: 1 0 auto;
 }
-
+nav .brand-logo {
+    padding-left: 15px;
+}
+.back-panel {
+    z-index: -1;
+}
 h1 {
   margin: 0;
-  padding: 50px;
-  z-index: -1;
+  padding: 25px 0 100px 0px;
 }
-.container {
-  margin-top: -50px;
+main .container:nth-child(2) {
+  margin-top: -90px;
 }
+
 .select-wrapper + label {
   font-size: 1em;
 }
