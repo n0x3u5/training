@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Attendance Monitoring System</title>
+  <link rel="stylesheet" href="styles/main.css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+  <header>
+    <div class="topper">
+      <h1 id="logo">AttendMate.</h1>
+      <p id="head-blurb">You are logged in as Horace Admin.&nbsp;<a href="#">Logout.</a></p>
+    </div>
+    <nav>
+  		<ul>
+        <li><a href="#" class="active">Dash</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Forum</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+	  </nav>
+  </header>
+  <main>
+    <section id="database">
+      <h2>Attendance Database</h2>
+      <form id="search-form">
+        <input type="text" placeholder="Search database" class="search" required>
+        <input type="button" class="button" value="Search">
+      </form>
+      <table>
+        <thead>
+          <tr>
+            <th>Index</th>
+            <th>Name</th>
+            <th>Designation</th>
+            <th>Attendance</th>
+            <th class="no-border">Leave</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>001</td>
+            <td>John Doe</td>
+            <td>Senior Head of Interdepartmental Systems</td>
+            <td>78</td>
+            <td class="no-border">2</td>
+          </tr>
+          <tr>
+            <td>003</td>
+            <td>Born Joe</td>
+            <td>Junior Head of Interdepartmental Systems</td>
+            <td>74</td>
+            <td class="no-border">6</td>
+          </tr>
+          <tr class="selected">
+            <td>004</td>
+            <td>Moan Foe</td>
+            <td>Head of Interdepartmental Systems</td>
+            <td>68</td>
+            <td class="no-border">12</td>
+          </tr>
+          <tr>
+            <td>005</td>
+            <td>Kaun Hoe</td>
+            <td>Assistant Head of Interdepartmental Systems</td>
+            <td>1</td>
+            <td class="no-border">79</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section id="details">
+      <h2>Selection Details</h2>
+      <div>
+        <img src="images/silhouette.jpg" alt="Employee Image" id="profile_img">
+        <div id="employee_details">
+          <h3>Employee Index</h3>
+          <p>004</p>
+          <h3>Name</h3>
+          <p>Moan Foe</p>
+          <h3>Designation</h3>
+          <p>Head of Interdepartmental Systems</p>
+          <h3>Days Elapsed</h3>
+          <p>70</p>
+          <h3>Days Present</h3>
+          <p>68</p>
+          <h3>Days Absent</h3>
+          <p>12</p>
+          <h3>Remarks</h3>
+          <p>Likes to moan and complain. Is a foe of employee 001.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

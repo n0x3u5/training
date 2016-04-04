@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FastBus - Get your bus. Fast.</title>
+  <link rel="stylesheet" href="styles/main.css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+  <header>
+    <div id="logo" class="menuUp">
+      <h1>FastBus.</h1>
+      <div id="navToggle"><a href="#">Menu</a></div>
+    </div>
+    <nav>
+  		<ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li>
+          <a href="#">Tickets <span class="toggle">Expand</span><span class="caret"></span></a>
+          <nav>
+            <ul>
+              <li><a href="#">Buses</a></li>
+              <li><a href="#">Places</a></li>
+              <li><a href="#">Packages</a></li>
+            </ul>
+          </nav>
+        </li>
+        <li><a href="#">Forum</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+	  </nav>
+  </header>
+  <main>
+    <h2>Book a Bus. Fast and Easy.</h2>
+    <section>
+      <form action="#" method="get">
+        <label for="source">From</label>
+        <input type="text" name="source" id="source" required>
+        <label for="dest">To</label>
+        <input type="text" name="dest" id="dest" required>
+        <label for="doj">Date of Journey</label>
+        <input type="text" name="doj" id="doj" required>
+        <label for="dor">Date of Return (optional)</label>
+        <input type="text" name="dor" id="dor">
+        <input type="reset" name="submit-btn" id="submit-btn" value="Reset Form">
+        <input type="submit" name="submit-btn" id="submit-btn" value="Search Buses">
+      </form>
+    </section>
+  </main>
+</body>
+</html>
