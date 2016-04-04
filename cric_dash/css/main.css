@@ -8,12 +8,27 @@ main {
   flex: 1 0 auto;
 }
 
+h1 {
+  margin: 0;
+  padding: 50px;
+  z-index: -1;
+}
+.container {
+  margin-top: -50px;
+}
+.select-wrapper + label {
+  font-size: 1em;
+}
 .select-wrapper input.select-dropdown {
-  font-size: 2em;
+  font-size: 1.5em;
 }
 .dropdown-content {
   border-radius: 2px;
 }
 .dropdown-content li > span {
-  font-size: 2em;
+  font-size: 1.5em;
+}
+#submit-team {
+  font-weight: 500;
+  font-size: 1.5em;
 }
