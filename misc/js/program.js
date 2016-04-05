@@ -5,7 +5,7 @@ console.log("Creating stooge object");
 // Wrapping stooge object in APP_GLOBAL
 APP_GLOBAL.stooge = {
   "first-name" : "Jerome",
-  "last-name" : "Howard",
+  "last-name" : "Howard"
 };
 
 console.log("Creating flight object");
