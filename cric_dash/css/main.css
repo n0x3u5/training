@@ -21,6 +21,10 @@ main .container:nth-child(2) {
   margin-top: -90px;
 }
 
+#tab-container, #login-tab {
+  background: #FFF;
+}
+
 .select-wrapper + label {
   font-size: 1em;
 }

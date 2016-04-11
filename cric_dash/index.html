@@ -52,6 +52,59 @@
             </div>
           </form>
         </div>
+        <div id="loginModal" class="modal">
+          <div class="modal-content">
+            <div class="row"><h4>Login or Signup first!</h4></div>
+            <div class="row">
+              <div class="col s12" id="tab-container">
+                <ul class="tabs">
+                  <li class="tab col s3"><a class="active" href="#login-tab">Login</a></li>
+                  <li class="tab col s3"><a href="#signup-tab">Sign Up</a></li>
+                </ul>
+              </div>
+              <div id="login-tab" class="col s12">
+                <form class="login-form col s12" method="post">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="email" type="email" class="validate">
+                      <label for="email" data-error="Invalid email.">Email</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="password" type="password" class="validate">
+                      <label for="password">Password</label>
+                    </div>
+                  </div>
+                </form>
+                <a href="#" class="right modal-action modal-close waves-effect waves-green btn-flat" id="login-btn">Login</a>
+              </div>
+              <div id="signup-tab" class="col s12">
+                <form class="login-form col s12" method="post">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="email" type="email" class="validate">
+                      <label for="email" data-error="Invalid email.">Email</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="password" type="password" class="validate">
+                      <label for="password">Password</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="password" type="password" class="validate">
+                      <label for="password">Password</label>
+                    </div>
+                  </div>
+                </form>
+                <a href="#" class="right modal-action modal-close waves-effect waves-green btn-flat" id="login-btn">Signup</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
     <footer class="page-footer indigo darken-2">
