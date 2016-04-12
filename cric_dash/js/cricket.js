@@ -1,17 +1,17 @@
-var users = [
-  {
-    "email" : "nox@gmail.com",
-    "password" : "nox123"
-  },
-  {
-    "email" : "ayan@gmail.com",
-    "password" : "ayan123"
-  },
-  {
-    "email" : "prerna@gmail.com",
-    "password" : "prerna123"
-  }
-];
+// var users = [
+//   {
+//     "email" : "nox@gmail.com",
+//     "password" : "nox123"
+//   },
+//   {
+//     "email" : "ayan@gmail.com",
+//     "password" : "ayan123"
+//   },
+//   {
+//     "email" : "prerna@gmail.com",
+//     "password" : "prerna123"
+//   }
+// ];
 
 var submitBtn = document.querySelector('#submit-team');
 var loginBtn = document.querySelector('#login-btn');
@@ -51,24 +51,34 @@ signupBtn.addEventListener("click", function onClick(event) {
   var inputEmail = document.getElementById('signupEmail').value;
   var inputPass = document.getElementById('signupPassword').value;
   var inputPassConf = document.getElementById('signupPasswordConf').value;
+  if (inputPass.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/g)) {
+    if (inputPass === inputPassConf) {
+      var user = new User(inputEmail, inputPass);
+      createParsedUsers();
+      parsedUsers.push(user);
+      localStorage.setItem("users", JSON.stringify(parsedUsers));
+    } else {
+      alert("Password mismatch!");
+    }
+  } else {
+    alert("The password must contain a minimum of 8 characters, a letter and a number!");
+  }
 });
+
+var User = function(email, password) {
+  this.email = email;
+  this.password = password;
+};
 
 var checkLogin = function() {
   console.log(localStorage.getItem("isLoggedIn"));
-  if(localStorage.getItem("isLoggedIn") === "false") {
+  if(localStorage.getItem("isLoggedIn") === "false" || !localStorage.getItem("isLoggedIn")) {
     console.log("No one is logged in.");
     return false;
   } else {
     console.log("Someone is logged in.");
     return true;
   }
-};
-var logoutUser = function() {
-  event.preventDefault();
-  localStorage.setItem('isLoggedIn', false);
-  var logoutA = document.getElementById('logout-anchor');
-  logoutA.parentNode.removeChild(logoutA);
-  Materialize.toast("You have been logged out!", 4000);
 };
 
 var createLogout = function() {
@@ -88,18 +98,44 @@ var createLogin = function() {
   });
 };
 
-var isValidPassword = function(inputPass) {
-
+var logoutUser = function() {
+  event.preventDefault();
+  localStorage.setItem('isLoggedIn', false);
+  localStorage.setItem('userEmail', "");
+  var logoutA = document.getElementById('logout-anchor');
+  logoutA.parentNode.removeChild(logoutA);
+  Materialize.toast("You have been logged out!", 4000);
 };
 
 var isValidUser = function(inputEmail, inputPass) {
-  for (var user in users) {
-    if (inputEmail === users[user].email && inputPass === users[user].password) {
+  createParsedUsers();
+  for (var parsedUser in parsedUsers) {
+    if (inputEmail === parsedUsers[parsedUser].email && inputPass === parsedUsers[parsedUser].password) {
       return true;
-    } else if(user === users.length - 1) {
-      return false;
-    } else {
+    } else if(parsedUser === parsedUsers.length - 1) {
       return false;
     }
   }
 };
+
+var createParsedUsers = function() {
+  parsedUsers = JSON.parse(localStorage.getItem("users"));
+  if (parsedUsers === null) {
+    var users=[];
+    localStorage.setItem("users", JSON.stringify(users));
+    parsedUsers = JSON.parse(localStorage.getItem("users"));
+  }
+};
+
+function allStorage() {
+
+    var values = [],
+        keys = Object.keys(localStorage),
+        i = keys.length;
+
+    while ( i-- ) {
+        values.push( localStorage.getItem(keys[i]) );
+    }
+
+    return values;
+}
