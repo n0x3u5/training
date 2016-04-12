@@ -13,7 +13,7 @@
       <nav class="nav-wrapper indigo darken-2">
         <a href="#" class="brand-logo">CricDash</a>
         <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
+        <ul class="right hide-on-med-and-down" id="screen-nav">
           <li><a href="#">Features</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Help</a></li>
@@ -66,13 +66,13 @@
                 <form class="login-form col s12" method="post">
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="email" type="email" class="validate">
-                      <label for="email" data-error="Invalid email.">Email</label>
+                      <input id="loginEmail" type="email" class="validate">
+                      <label for="loginEmail" data-error="Invalid email.">Email</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="password" type="password" class="validate">
+                      <input id="loginPassword" type="password" class="validate">
                       <label for="password">Password</label>
                     </div>
                   </div>
@@ -83,24 +83,24 @@
                 <form class="login-form col s12" method="post">
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="email" type="email" class="validate">
+                      <input id="signupEmail" type="email" class="validate">
                       <label for="email" data-error="Invalid email.">Email</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="password" type="password" class="validate">
+                      <input id="signupPassword" type="password" class="validate">
                       <label for="password">Password</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="password" type="password" class="validate">
-                      <label for="password">Password</label>
+                      <input id="signupPasswordConf" type="password" class="validate">
+                      <label for="password">Confirm Password</label>
                     </div>
                   </div>
                 </form>
-                <a href="#" class="right modal-action modal-close waves-effect waves-green btn-flat" id="login-btn">Signup</a>
+                <a href="#" class="right modal-action modal-close waves-effect waves-green btn-flat" id="signup-btn">Signup</a>
               </div>
             </div>
           </div>

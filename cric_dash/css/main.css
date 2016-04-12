@@ -21,7 +21,11 @@ main .container:nth-child(2) {
   margin-top: -90px;
 }
 
-#tab-container, #login-tab {
+.modal {
+  max-height: 100%;
+}
+
+#tab-container, #login-tab, #signup-tab {
   background: #FFF;
 }
 
