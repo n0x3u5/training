@@ -37,13 +37,19 @@ loginBtn.addEventListener("click", function onClick(event) {
   var inputEmail = document.getElementById('loginEmail').value;
   var inputPass = document.getElementById('loginPassword').value;
   console.log(inputEmail + " , " + inputPass);
-  if(isValidUser(inputEmail, inputPass)) {
-    localStorage.setItem('userEmail', inputEmail);
-    localStorage.setItem('isLoggedIn', true);
-    createLogout();
-    console.log("Is valid email and password!");
+  if(inputEmail.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/gi)) {
+    if(isValidUser(inputEmail, inputPass)) {
+      localStorage.setItem('userEmail', inputEmail);
+      localStorage.setItem('isLoggedIn', true);
+      createLogout();
+      console.log("Is valid email and password!");
+    } else {
+      alert("Invalid user detected. You shall be exterminated.");
+    }
   } else {
-    alert("Invalid user detected. You shall be exterminated.");
+    var emailRow = document.getElementById("emailField");
+    createValidationError(emailRow, "Please enter a valid email");
+    console.log("Not a valid email ID.");
   }
 });
 signupBtn.addEventListener("click", function onClick(event) {
@@ -81,6 +87,13 @@ var checkLogin = function() {
   }
 };
 
+var createValidationError = function(field, message) {
+  console.log("Creating error!");
+  var newP = document.createElement("p");
+  newP.appendChild(document.createTextNode(message));
+  newP.setAttribute("class", "error");
+  field.appendChild(newP);
+};
 var createLogout = function() {
   var navUl = document.getElementById('screen-nav');
   var newLi = document.createElement("li");
@@ -133,7 +146,7 @@ function allStorage() {
         keys = Object.keys(localStorage),
         i = keys.length;
 
-    while ( i-- ) {
+    while (i--) {
         values.push( localStorage.getItem(keys[i]) );
     }
 
