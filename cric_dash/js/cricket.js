@@ -34,22 +34,33 @@ submitBtn.addEventListener("click", function onClick(event) {
 });
 loginBtn.addEventListener("click", function onClick(event) {
   event.preventDefault();
-  var inputEmail = document.getElementById('loginEmail').value;
-  var inputPass = document.getElementById('loginPassword').value;
+  var emailField = document.getElementById('loginEmail');
+  var inputEmail = emailField.value;
+  var passwordField = document.getElementById('loginPassword');
+  var inputPass = passwordField.value;
   console.log(inputEmail + " , " + inputPass);
   if(inputEmail.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/gi)) {
     if(isValidUser(inputEmail, inputPass)) {
       localStorage.setItem('userEmail', inputEmail);
       localStorage.setItem('isLoggedIn', true);
       createLogout();
-      console.log("Is valid email and password!");
+      Materialize.toast("You're logged in!", 4000);
     } else {
-      alert("Invalid user detected. You shall be exterminated.");
+      var passwordRow = document.getElementById("passwordField");
+      if(passwordRow.contains(document.getElementsByClassName("error")[0])) {
+        removeValidationError(passwordRow);
+      }
+      createValidationError(passwordRow, "Username and password combination is invalid.");
     }
   } else {
     var emailRow = document.getElementById("emailField");
+    var errorP = document.getElementsByClassName("error");
+    removeValidationError(emailRow);
     createValidationError(emailRow, "Please enter a valid email");
     console.log("Not a valid email ID.");
+    emailField.addEventListener("keydown", function onkeydown(event) {
+      removeValidationError(emailRow);
+    });
   }
 });
 signupBtn.addEventListener("click", function onClick(event) {
@@ -88,12 +99,18 @@ var checkLogin = function() {
 };
 
 var createValidationError = function(field, message) {
-  console.log("Creating error!");
   var newP = document.createElement("p");
   newP.appendChild(document.createTextNode(message));
   newP.setAttribute("class", "error");
   field.appendChild(newP);
 };
+var removeValidationError = function(field) {
+  var errors = document.getElementsByClassName('error');
+  if (errors[0]) {
+    field.removeChild(errors[0]);
+  }
+}
+
 var createLogout = function() {
   var navUl = document.getElementById('screen-nav');
   var newLi = document.createElement("li");
