@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Cric Dashboard</title>
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/material_icons.css">
     <link rel="stylesheet" href="css/materialize.min.css" media="screen,projection">
     <link rel="stylesheet" href="css/main.css" media="screen" charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -48,22 +48,23 @@
               </div>
             </div>
             <div class="row">
-              <button class="btn waves-effect waves-light btn-large amber col s12 m2 offset-m5" type="submit" id="submit-team" name="submit-team">Submit<i class="material-icons right">send</i></button>
+              <button class="btn waves-effect waves-light btn-large amber col s12 m2 offset-m5" type="submit" id="submit-team" name="submit-team">Submit<i class="material-icons right">&#xE163;</i></button>
             </div>
           </form>
         </div>
         <div id="loginModal" class="modal">
           <div class="modal-content">
-            <div class="row"><h4>Login or Signup first!</h4></div>
+            <div class="row"><h4>Login or Sign Up first!</h4></div>
             <div class="row">
               <div class="col s12" id="tab-container">
                 <ul class="tabs">
-                  <li class="tab col s3"><a class="active" href="#login-tab">Login</a></li>
-                  <li class="tab col s3"><a href="#signup-tab">Sign Up</a></li>
+                  <li class="tab col s3"><a class="active indigo-text" href="#login-tab">Login</a></li>
+                  <li class="tab col s3"><a class="indigo-text" href="#signup-tab">Sign Up</a></li>
+                  <div class="indicator indigo" style="z-index:1"></div>
                 </ul>
               </div>
               <div id="login-tab" class="col s12">
-                <form class="login-form col s12" method="post">
+                <form class="col s12" method="post" id="login-form">
                   <div class="row">
                     <div class="input-field col s12" id="emailField">
                       <input id="loginEmail" type="email">
@@ -77,10 +78,10 @@
                     </div>
                   </div>
                 </form>
-                <a href="#" class="right modal-action waves-effect waves-green btn-flat" id="login-btn">Login</a>
+                <a href="#" class="right modal-action waves-effect waves-indigo btn-flat indigo-text" id="login-btn">Login</a>
               </div>
               <div id="signup-tab" class="col s12">
-                <form class="login-form col s12" method="post">
+                <form class="col s12" method="post" id="signup-form">
                   <div class="row">
                     <div class="input-field col s12">
                       <input id="signupEmail" type="email">
@@ -100,7 +101,7 @@
                     </div>
                   </div>
                 </form>
-                <a href="#" class="right modal-action waves-effect waves-green btn-flat" id="signup-btn">Signup</a>
+                <a href="#" class="right modal-action waves-effect waves-indigo btn-flat indigo-text" id="signup-btn">Sign Up</a>
               </div>
             </div>
           </div>

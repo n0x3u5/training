@@ -38,29 +38,31 @@ loginBtn.addEventListener("click", function onClick(event) {
   var inputEmail = emailField.value;
   var passwordField = document.getElementById('loginPassword');
   var inputPass = passwordField.value;
+  var passwordRow = document.getElementById("passwordField");
+  var emailRow = document.getElementById("emailField");
+  var errorP = document.getElementsByClassName("error");
   console.log(inputEmail + " , " + inputPass);
-  if(inputEmail.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/gi)) {
-    if(isValidUser(inputEmail, inputPass)) {
-      localStorage.setItem('userEmail', inputEmail);
-      localStorage.setItem('isLoggedIn', true);
-      createLogout();
-      Materialize.toast("You're logged in!", 4000);
-    } else {
-      var passwordRow = document.getElementById("passwordField");
-      if(passwordRow.contains(document.getElementsByClassName("error")[0])) {
-        removeValidationError(passwordRow);
+  if(inputEmail !== "" && inputPass !== "") {
+    if(inputEmail.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/gi)) {
+      if(isValidUser(inputEmail, inputPass)) {
+        localStorage.setItem('userEmail', inputEmail);
+        localStorage.setItem('isLoggedIn', true);
+        createLogout();
+        $("#loginModal").closeModal();
+        Materialize.toast("You're logged in!", 4000);
+      } else {
+        createValidationError(passwordRow, "Username and password combination is invalid.");
       }
-      createValidationError(passwordRow, "Username and password combination is invalid.");
+    } else {
+      removeValidationError(emailRow);
+      createValidationError(emailRow, "Please enter a valid email");
+      console.log("Not a valid email ID.");
+      emailField.addEventListener("keydown", function onkeydown(event) {
+        removeValidationError(emailRow);
+      });
     }
   } else {
-    var emailRow = document.getElementById("emailField");
-    var errorP = document.getElementsByClassName("error");
-    removeValidationError(emailRow);
-    createValidationError(emailRow, "Please enter a valid email");
-    console.log("Not a valid email ID.");
-    emailField.addEventListener("keydown", function onkeydown(event) {
-      removeValidationError(emailRow);
-    });
+    createValidationError(passwordRow, "Both the username and the password fields are required.");
   }
 });
 signupBtn.addEventListener("click", function onClick(event) {
@@ -99,6 +101,9 @@ var checkLogin = function() {
 };
 
 var createValidationError = function(field, message) {
+  if(field.contains(document.getElementsByClassName("error")[0])) {
+    removeValidationError(field);
+  }
   var newP = document.createElement("p");
   newP.appendChild(document.createTextNode(message));
   newP.setAttribute("class", "error");
@@ -106,8 +111,11 @@ var createValidationError = function(field, message) {
 };
 var removeValidationError = function(field) {
   var errors = document.getElementsByClassName('error');
+  console.log(errors);
   if (errors[0]) {
-    field.removeChild(errors[0]);
+    try {
+      field.removeChild(errors[0]);
+    } catch(e) {}
   }
 }
 
@@ -123,6 +131,10 @@ var createLogout = function() {
   newA.addEventListener('click', logoutUser);
 };
 var createLogin = function() {
+  var loginForm = document.getElementById('login-form');
+  var signupForm = document.getElementById('signup-form');
+  loginForm.reset();
+  signupForm.reset();
   $('#loginModal').openModal({
     ready: function() { $('ul.tabs').tabs('select_tab', 'login-tab'); }
   });
