@@ -1,18 +1,3 @@
-// var users = [
-//   {
-//     "email" : "nox@gmail.com",
-//     "password" : "nox123"
-//   },
-//   {
-//     "email" : "ayan@gmail.com",
-//     "password" : "ayan123"
-//   },
-//   {
-//     "email" : "prerna@gmail.com",
-//     "password" : "prerna123"
-//   }
-// ];
-
 var submitBtn = document.querySelector('#submit-team');
 var loginBtn = document.querySelector('#login-btn');
 var signupBtn = document.querySelector('#signup-btn');
@@ -26,11 +11,10 @@ window.onload = function() {
 submitBtn.addEventListener("click", function onClick(event) {
   event.preventDefault();
   if (checkLogin()) {
-
+    afterLogin();
   } else {
     createLogin();
   }
-  // $(".card-panel").fadeOut();
 });
 loginBtn.addEventListener("click", function onClick(event) {
   event.preventDefault();
@@ -41,7 +25,6 @@ loginBtn.addEventListener("click", function onClick(event) {
   var passwordRow = document.getElementById("passwordField");
   var emailRow = document.getElementById("emailField");
   var errorP = document.getElementsByClassName("error");
-  console.log(inputEmail + " , " + inputPass);
   if(inputEmail !== "" && inputPass !== "") {
     if(inputEmail.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/gi)) {
       if(isValidUser(inputEmail, inputPass)) {
@@ -50,13 +33,13 @@ loginBtn.addEventListener("click", function onClick(event) {
         createLogout();
         $("#loginModal").closeModal();
         Materialize.toast("You're logged in!", 4000);
+        afterLogin();
       } else {
-        createValidationError(passwordRow, "Username and password combination is invalid.");
+        createValidationError(passwordRow, "Username and password combination invalid. Are you signed up yet?");
       }
     } else {
-      removeValidationError(emailRow);
       createValidationError(emailRow, "Please enter a valid email");
-      console.log("Not a valid email ID.");
+      console.log("Not a valid login email ID.");
       emailField.addEventListener("keydown", function onkeydown(event) {
         removeValidationError(emailRow);
       });
@@ -67,20 +50,45 @@ loginBtn.addEventListener("click", function onClick(event) {
 });
 signupBtn.addEventListener("click", function onClick(event) {
   event.preventDefault();
-  var inputEmail = document.getElementById('signupEmail').value;
+  var emailField = document.getElementById('signupEmail');
+  var inputEmail = emailField.value;
   var inputPass = document.getElementById('signupPassword').value;
   var inputPassConf = document.getElementById('signupPasswordConf').value;
-  if (inputPass.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/g)) {
-    if (inputPass === inputPassConf) {
-      var user = new User(inputEmail, inputPass);
-      createParsedUsers();
-      parsedUsers.push(user);
-      localStorage.setItem("users", JSON.stringify(parsedUsers));
+  var emailRow = document.getElementById("signupEmailField");
+  var passwordRow = document.getElementById("signupPassField");
+  var passConfRow = document.getElementById("signupConfField");
+  var signupForm = document.getElementById('signup-form');
+  var loginEmail = document.getElementById("loginEmail");
+  if(inputEmail !== "" && inputPass !== "" && inputPassConf !== "") {
+    if (inputEmail.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/gi)) {
+      if (inputPass.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/g)) {
+        if (inputPass === inputPassConf) {
+          var user = new User(inputEmail, inputPass);
+          createParsedUsers();
+          if(isInParsedUsers(parsedUsers, user, "email")) {
+            createValidationError(passConfRow, "That email already exists. Try another email.");
+          } else {
+            parsedUsers.push(user);
+            localStorage.setItem("users", JSON.stringify(parsedUsers));
+            signupForm.reset();
+            $('ul.tabs').tabs('select_tab', 'login-tab');
+            loginEmail.focus();
+          }
+        } else {
+          createValidationError(passConfRow, "The passwords don't match.");
+        }
+      } else {
+        createValidationError(passwordRow, "The password must contain a minimum of 8 characters, a letter and a number!");
+      }
     } else {
-      alert("Password mismatch!");
+      createValidationError(emailRow, "Please enter a valid email");
+      console.log("Not a valid signup email ID.");
+      emailField.addEventListener("keydown", function onkeydown(event) {
+        removeValidationError(emailRow);
+      });
     }
   } else {
-    alert("The password must contain a minimum of 8 characters, a letter and a number!");
+    createValidationError(passConfRow, "Both the username and the two password fields are required.");
   }
 });
 
@@ -111,13 +119,12 @@ var createValidationError = function(field, message) {
 };
 var removeValidationError = function(field) {
   var errors = document.getElementsByClassName('error');
-  console.log(errors);
   if (errors[0]) {
     try {
       field.removeChild(errors[0]);
     } catch(e) {}
   }
-}
+};
 
 var createLogout = function() {
   var navUl = document.getElementById('screen-nav');
@@ -147,6 +154,7 @@ var logoutUser = function() {
   var logoutA = document.getElementById('logout-anchor');
   logoutA.parentNode.removeChild(logoutA);
   Materialize.toast("You have been logged out!", 4000);
+  afterLogout();
 };
 
 var isValidUser = function(inputEmail, inputPass) {
@@ -167,6 +175,23 @@ var createParsedUsers = function() {
     localStorage.setItem("users", JSON.stringify(users));
     parsedUsers = JSON.parse(localStorage.getItem("users"));
   }
+};
+
+var isInParsedUsers = function(users, user, prop) {
+  for (var i = 0; i < users.length; i++) {
+    if (users[i][prop] === user[prop]) {
+      return true;
+    }
+  }
+  return false;
+};
+
+var afterLogin = function() {
+  $(".card-panel").fadeOut();
+};
+
+var afterLogout = function() {
+  $(".card-panel").fadeIn();
 };
 
 function allStorage() {
