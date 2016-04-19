@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="css/material_icons.css">
     <link rel="stylesheet" href="css/materialize.min.css" media="screen,projection">
     <link rel="stylesheet" href="css/main.css" media="screen" charset="utf-8">
+    <script type="text/javascript" src="js/fcharts/js/fusioncharts.js"></script>
+    <script type="text/javascript" src="js/fcharts/js/themes/fusioncharts.theme.fint.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="theme-color" content="#1a237e">
   </head>
@@ -32,18 +34,18 @@
     </header>
     <main>
       <div class="indigo" class="back-panel">
-        <h1 class="container white-text">Team Selection</h1>
+        <h1 class="container white-text" id="header-text">Team Selection</h1>
       </div>
-      <div class="container">
+      <div class="container" id="dashboard">
         <div class="card-panel">
           <span class="card-title"></span>
           <form class="team-form" action="#" method="post">
             <div class="row">
               <div class="input-field col s12">
                 <select class="icons" id="team-select" name="team-select">
-                  <option value="india" data-icon="res/images/logo_india.png" class="circle">India</option>
-                  <option value="australia" data-icon="res/images/logo_australia.png" class="circle">Australia</option>
-                  <option value="new_zealand" data-icon="res/images/logo_newzealand.png" class="circle">New Zealand</option>
+                  <option value="India" data-icon="res/images/logo_india.png" class="circle">India</option>
+                  <option value="Australia" data-icon="res/images/logo_australia.png" class="circle">Australia</option>
+                  <option value="New Zealand" data-icon="res/images/logo_newzealand.png" class="circle">New Zealand</option>
                 </select>
                 <label for="team-select">Select a team</label>
               </div>
@@ -123,6 +125,17 @@
       $(document).ready(function(){
         $('.button-collapse').sideNav();
         $('select').material_select();
+        FusionCharts.ready(function() {
+          var revenueSplit = new FusionCharts({
+            "type": "doughnut2d",
+            "renderAt": "chart-div",
+            "width": "500",
+            "height": "300",
+            "dataFormat": "jsonurl",
+            "dataSource": "res/data/rr_au.json"
+          });
+          revenueSplit.render();
+        });
       });
     </script>
   </body>

@@ -36,6 +36,8 @@ main .container:nth-child(2) {
 #login-tab, #signup-tab {
   margin-top: 10px;
 }
+#chart-div {
+}
 
 input[type=email]:focus:not([readonly])+label, input[type=password]:focus:not([readonly])+label {
   color: #3f51b5;
