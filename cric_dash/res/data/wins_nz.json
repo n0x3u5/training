@@ -1,0 +1,31 @@
+{
+    "chart": {
+        "caption": "Matches Won",
+        "subCaption": "(last 50 games)",
+        "showBorder": "0",
+        "use3DLighting": "0",
+        "enableSmartLabels": "0",
+        "startingAngle": "310",
+        "showLabels": "0",
+        "showPercentValues": "1",
+        "showLegend": "1",
+        "centerLabel": "$label: $value",
+        "centerLabelBold": "1",
+        "showTooltip": "0",
+        "decimals": "0",
+        "useDataPlotColorForLabels": "1",
+        "theme": "fint"
+    },
+    "data": [
+        {
+            "label": "Won",
+            "value": "31",
+            "color": "#2196f3"
+        },
+        {
+            "label": "Lost",
+            "value": "19",
+            "color": "#e3f2fd"
+        }
+    ]
+}

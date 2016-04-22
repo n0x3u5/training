@@ -195,14 +195,32 @@
 
   var afterLogin = function() {
     var selectedTeam = $("#team-select option:selected").val();
-    $(".card-panel").fadeOut();
+    $("#team-card").fadeOut();
     $("#header-text").html(selectedTeam);
-    var chartDiv = $("<div>", {id:"chart-div"});
-    $("#dashboard").append(chartDiv);
+    var chartRowOne = $("<div>", {id:"chartRowOne", class:"row"});
+    var colSpec = $("<div>", {id:"colSpec", class:"col s12 m6"});
+    var cardPanel = $("<div>", {id:"cardPanel", class:"card-panel"});
+    var winsChart = $("<div>", {id:"wins"});
+    $("#dashboard").append(chartRowOne);
+    $("#chartRowOne").append(colSpec);
+    $("#colSpec").append(cardPanel);
+    $("#cardPanel").append(winsChart);
+    FusionCharts.ready(function() {
+      var inWins = new FusionCharts({
+        "type": "doughnut2d",
+        "renderAt": "wins",
+        "width": "100%",
+        "height": "400",
+        "dataFormat": "jsonurl",
+        "dataSource": "res/data/rr_in.json"
+      }).render();
+    });
   };
 
   var afterLogout = function() {
-    $(".card-panel").fadeIn();
+    $("#chartRowOne").fadeOut();
+    $("#chartRowOne").remove();
+    $("#team-card").fadeIn();
     $("#header-text").html("Team Select");
   };
 }));

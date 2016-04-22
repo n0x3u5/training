@@ -37,7 +37,7 @@
         <h1 class="container white-text" id="header-text">Team Selection</h1>
       </div>
       <div class="container" id="dashboard">
-        <div class="card-panel">
+        <div class="card-panel" id="team-card">
           <span class="card-title"></span>
           <form class="team-form" action="#" method="post">
             <div class="row">
@@ -125,17 +125,6 @@
       $(document).ready(function(){
         $('.button-collapse').sideNav();
         $('select').material_select();
-        FusionCharts.ready(function() {
-          var revenueSplit = new FusionCharts({
-            "type": "doughnut2d",
-            "renderAt": "chart-div",
-            "width": "500",
-            "height": "300",
-            "dataFormat": "jsonurl",
-            "dataSource": "res/data/rr_au.json"
-          });
-          revenueSplit.render();
-        });
       });
     </script>
   </body>

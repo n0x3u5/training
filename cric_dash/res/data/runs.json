@@ -1,0 +1,23 @@
+{
+    "chart": {
+        "caption": "Highest Runs Scored",
+        "subCaption": "in an ODI",
+        "xAxisName": "Team",
+        "yAxisName": "Runs",
+        "theme": "fint"
+    },
+    "data": [
+        {
+            "label": "Australia",
+            "value": "434"
+        },
+        {
+            "label": "New Zealand",
+            "value": "402"
+        },
+        {
+            "label": "India",
+            "value": "418"
+        }
+    ]
+}
