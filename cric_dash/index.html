@@ -14,28 +14,51 @@
   <body class="indigo lighten-5">
     <header>
       <nav class="nav-wrapper indigo darken-2">
-        <a href="#" class="brand-logo">CricDash</a>
-        <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down" id="screen-nav">
-          <li><a href="#">Features</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Help</a></li>
-          <li><a href="#">Contacts</a></li>
-          <li><a href="#">Feedback</a></li>
-        </ul>
-        <ul class="side-nav" id="mobile-nav">
+        <div class="container">
+          <a href="#" data-activates="slide-out-fixed" class="button-collapse top-nav full hide-on-large-only">
+            <i class="material-icons">menu</i>
+          </a>
+          <a href="#" class="brand-logo">CricDash</a>
+          <ul class="right">
+            <li><a href="#" class="dropdown-button" data-activates="more-info" id="nav-overflow"><i class="material-icons">more_vert</i></a></li>
+          </ul>
+          <ul class="dropdown-content" id="more-info">
+            <li><a href="#!" class="indigo-text">About</a></li>
+            <li><a href="#!" class="indigo-text">Contact</a></li>
+            <li><a href="#!" class="indigo-text">Legal</a></li>
+          </ul>
+          <form class="right input-field hide-on-med-and-down">
+            <div class="input-field">
+              <input type="search" id="search" placeholder="Search for a team">
+              <label for="search"><i class="material-icons">search</i></label>
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </div>
+        <ul class="side-nav fixed indigo lighten-5" id="slide-out-fixed">
+          <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+              <li id="user-display" class="indigo darken-3">
+                <a class="collapsible-header white-text" id="sidenav-username">
+                  <img id="user-img" src="res/images/avatar.png" class="circle" alt="User" width="60px" height="60px">
+                  <span id="username">john@doe.com</span>
+                  <i id="caret" class="material-icons right">arrow_drop_down</i></a>
+                <div class="collapsible-body indigo darken-3">
+                  <ul id="user-menu">
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li class="sidebar-item active" id="team-select"><a href="#"><i class="material-icons left">flag</i>Team Select</a></li>
           <li><a href="#"><i class="material-icons left">stars</i>Features</a></li>
           <li><a href="#"><i class="material-icons left">info</i>About</a></li>
           <li><a href="#"><i class="material-icons left">help</i>Help</a></li>
-          <li><a href="#"><i class="material-icons left">question_answer</i>Contacts</a></li>
           <li><a href="#"><i class="material-icons left">rate_review</i>Feedback</a></li>
         </ul>
       </nav>
     </header>
     <main>
-      <div class="indigo" class="back-panel">
-        <h1 class="container white-text" id="header-text">Team Selection</h1>
-      </div>
       <div class="container" id="dashboard">
         <div class="card-panel" id="team-card">
           <span class="card-title"></span>

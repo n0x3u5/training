@@ -1,3 +1,48 @@
+header, main, footer, .brand-logo {
+  padding-left: 240px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+nav ul a:hover {
+  background-color: rgba(0,0,0,0);
+}
+#nav-overflow {
+  padding-right: 0;
+  height: 100%;
+}
+#user-display {
+  background: url(../res/images/user_bkg.jpg);
+  background-size: cover;
+}
+#username {
+  margin-top: -20px;
+  display: inline-block;
+  vertical-align: text-top;
+  padding-left: 10px;
+}
+#user-img {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  border: 2px solid black;
+}
+#caret {
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 0;
+}
+#sidenav-username {
+  padding: 0;
+}
+.container {
+  width: 95%;
+}
 body {
   display: flex;
   min-height: 100vh;
@@ -6,19 +51,15 @@ body {
 main {
   flex: 1 0 auto;
 }
-
-nav .brand-logo {
-    padding-left: 15px;
-}
 .back-panel {
     z-index: -1;
 }
 h1 {
   margin: 0;
-  padding: 25px 0 100px 0px;
+  padding: 25px 0 55px 0px;
 }
 main .container:nth-child(2) {
-  margin-top: -90px;
+  margin-top: -20px;
 }
 
 .modal {

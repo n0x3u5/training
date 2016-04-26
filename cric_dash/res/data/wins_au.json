@@ -20,12 +20,12 @@
         {
             "label": "Won",
             "value": "34",
-            "color": "#2196f3"
+            "color": "#ffeb3b"
         },
         {
             "label": "Lost",
             "value": "16",
-            "color": "#e3f2fd"
+            "color": "#fff9c4"
         }
     ]
 }

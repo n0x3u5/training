@@ -8,6 +8,7 @@
   var loginBtn = document.querySelector('#login-btn');
   var signupBtn = document.querySelector('#signup-btn');
   var parsedUsers;
+
   window.onload = function() {
     if (checkLogin()) {
       createLogout();
@@ -134,15 +135,26 @@
   };
 
   var createLogout = function() {
-    var navUl = document.getElementById('screen-nav');
+    var navUl = document.getElementById('user-menu');
     var newLi = document.createElement("li");
     var newA = document.createElement("a");
+    var deleteA = document.createElement("a");
+
+    deleteA.appendChild(document.createTextNode("Delete Account"));
+    deleteA.setAttribute("href", "#!");
+    deleteA.setAttribute("id", "delete-anchor");
+    deleteA.setAttribute("class", "white-text");
+    newLi.appendChild(deleteA);
+    deleteA.addEventListener('click', deleteUser);
+
     newA.appendChild(document.createTextNode("Logout"));
-    newA.setAttribute("href", "#");
+    newA.setAttribute("href", "#!");
     newA.setAttribute("id", "logout-anchor");
+    newA.setAttribute("class", "white-text");
     newLi.appendChild(newA);
-    navUl.appendChild(newLi);
     newA.addEventListener('click', logoutUser);
+
+    navUl.appendChild(newLi);
   };
   var createLogin = function() {
     var loginForm = document.getElementById('login-form');
@@ -155,13 +167,32 @@
   };
 
   var logoutUser = function(event) {
-    event.preventDefault();
+    if (event !== undefined) {
+      event.preventDefault();
+    }
     localStorage.setItem('isLoggedIn', false);
     localStorage.setItem('userEmail', "");
+    localStorage.setItem('selectedTeam', "none");
     var logoutA = document.getElementById('logout-anchor');
     logoutA.parentNode.removeChild(logoutA);
+    var deleteA = document.getElementById('delete-anchor');
+    deleteA.parentNode.removeChild(deleteA);
     Materialize.toast("You have been logged out!", 4000);
     afterLogout();
+  };
+
+  var deleteUser = function(event) {
+    event.preventDefault();
+    createParsedUsers();
+    var i = parsedUsers.length;
+    while (i--) {
+      if (parsedUsers[i] && parsedUsers[i].hasOwnProperty("email") && parsedUsers[i].email === localStorage.getItem("userEmail")) {
+        parsedUsers.splice(i, 1);
+      }
+    }
+    localStorage.setItem("users", JSON.stringify(parsedUsers));
+    Materialize.toast("Account deleted.", 4000);
+    logoutUser();
   };
 
   var isValidUser = function(inputEmail, inputPass) {
@@ -194,25 +225,78 @@
   };
 
   var afterLogin = function() {
-    var selectedTeam = $("#team-select option:selected").val();
+    var selectedTeam = "none";
+    if (localStorage.getItem("selectedTeam") === null || localStorage.getItem("selectedTeam") === "none") {
+      selectedTeam = $("#team-select option:selected").val();
+      localStorage.setItem("selectedTeam", selectedTeam);
+    } else {
+      selectedTeam = localStorage.getItem("selectedTeam");
+    }
     $("#team-card").fadeOut();
     $("#header-text").html(selectedTeam);
     var chartRowOne = $("<div>", {id:"chartRowOne", class:"row"});
-    var colSpec = $("<div>", {id:"colSpec", class:"col s12 m6"});
-    var cardPanel = $("<div>", {id:"cardPanel", class:"card-panel"});
+    var colSpecLeft = $("<div>", {id:"colSpecLeft", class:"col s12 m6"});
+    var colSpecRight = $("<div>", {id:"colSpecRight", class:"col s12 m6"});
+    var cardPanelLeft = $("<div>", {id:"cardPanelLeft", class:"card-panel"});
+    var cardPanelRight = $("<div>", {id:"cardPanelRight", class:"card-panel"});
     var winsChart = $("<div>", {id:"wins"});
+    var runsChart = $("<div>", {id:"runs"});
     $("#dashboard").append(chartRowOne);
-    $("#chartRowOne").append(colSpec);
-    $("#colSpec").append(cardPanel);
-    $("#cardPanel").append(winsChart);
+
+    $("#chartRowOne").append(colSpecLeft);
+    $("#colSpecLeft").append(cardPanelLeft);
+    $("#cardPanelLeft").append(winsChart);
+
+    $("#chartRowOne").append(colSpecRight);
+    $("#colSpecRight").append(cardPanelRight);
+    $("#cardPanelRight").append(runsChart);
+
+    if (selectedTeam === "India") {
+      FusionCharts.ready(function() {
+        var inWins = new FusionCharts({
+          "type": "doughnut2d",
+          "renderAt": "wins",
+          "width": "100%",
+          "height": "400",
+          "dataFormat": "jsonurl",
+          "dataSource": "res/data/wins_in.json"
+        }).render();
+      });
+    } else if (selectedTeam === "Australia") {
+      FusionCharts.ready(function() {
+        var inWins = new FusionCharts({
+          "type": "doughnut2d",
+          "renderAt": "wins",
+          "width": "100%",
+          "height": "400",
+          "dataFormat": "jsonurl",
+          "dataSource": "res/data/wins_au.json"
+        }).render();
+      });
+    } else if (selectedTeam === "New Zealand") {
+      FusionCharts.ready(function() {
+        var inWins = new FusionCharts({
+          "type": "doughnut2d",
+          "renderAt": "wins",
+          "width": "100%",
+          "height": "400",
+          "dataFormat": "jsonurl",
+          "dataSource": "res/data/wins_nz.json"
+        }).render();
+      });
+    } else {
+      var teamError = $("<h5>", {class:"red-text"});
+      teamError.text("No such team found.");
+      $("#wins").append(teamError);
+    }
     FusionCharts.ready(function() {
-      var inWins = new FusionCharts({
-        "type": "doughnut2d",
-        "renderAt": "wins",
+      var allRuns = new FusionCharts({
+        "type": "column2d",
+        "renderAt": "runs",
         "width": "100%",
         "height": "400",
         "dataFormat": "jsonurl",
-        "dataSource": "res/data/rr_in.json"
+        "dataSource": "res/data/runs.json"
       }).render();
     });
   };

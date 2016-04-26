@@ -9,15 +9,18 @@
     "data": [
         {
             "label": "Australia",
-            "value": "434"
+            "value": "434",
+            "color": "#ffeb3b"
         },
         {
             "label": "New Zealand",
-            "value": "402"
+            "value": "402",
+            "color": "#212121"
         },
         {
             "label": "India",
-            "value": "418"
+            "value": "418",
+            "color": "#2196f3"
         }
     ]
 }
