@@ -7,6 +7,7 @@
   var submitBtn = document.querySelector('#submit-team');
   var loginBtn = document.querySelector('#login-btn');
   var signupBtn = document.querySelector('#signup-btn');
+  var sideTeamSelect = document.querySelector('#team-select-side');
   var parsedUsers;
 
   window.onload = function() {
@@ -98,6 +99,12 @@
     } else {
       createValidationError(passConfRow, "Both the username and the two password fields are required.");
     }
+  });
+
+  sideTeamSelect.addEventListener("click", function onClick(event) {
+    event.preventDefault();
+    localStorage.setItem("selectedTeam", "none");
+    afterLogout();
   });
 
   var User = function(email, password) {
@@ -226,7 +233,7 @@
 
   var afterLogin = function() {
     var selectedTeam = "none";
-    if (localStorage.getItem("selectedTeam") === null || localStorage.getItem("selectedTeam") === "none") {
+    if (localStorage.getItem("selectedTeam") == "undefined" || localStorage.getItem("selectedTeam") == null || localStorage.getItem("selectedTeam") === "none") {
       selectedTeam = $("#team-select option:selected").val();
       localStorage.setItem("selectedTeam", selectedTeam);
     } else {
