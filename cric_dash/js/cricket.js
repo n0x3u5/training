@@ -233,7 +233,7 @@
 
   var afterLogin = function() {
     var selectedTeam = "none";
-    if (localStorage.getItem("selectedTeam") == "undefined" || localStorage.getItem("selectedTeam") == null || localStorage.getItem("selectedTeam") === "none") {
+    if (localStorage.getItem("selectedTeam") == "undefined" || localStorage.getItem("selectedTeam") === null || localStorage.getItem("selectedTeam") === "none") {
       selectedTeam = $("#team-select option:selected").val();
       localStorage.setItem("selectedTeam", selectedTeam);
     } else {
